@@ -4,7 +4,7 @@ project( googletest-distribution )
 
 enable_testing()
 
-option(BUILD_GTEST "Builds the googletest subproject" ON)
+option(BUILD_GTEST "Builds the googletest subproject" OFF)
 
 #Note that googlemock target already builds googletest
 option(BUILD_GMOCK "Builds the googlemock subproject" ON)
