@@ -1,4 +1,5 @@
 _build/
+.vscode/
 *.opensdf
 *.sdf
 #ignore thumbnails created by windows
