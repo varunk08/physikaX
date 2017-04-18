@@ -1,5 +1,8 @@
 set(TARGET simple-project)
-set(SOURCES main.cpp)
+
+set(
+  SOURCES main.cpp
+)
 
 project(${TARGET})
 
