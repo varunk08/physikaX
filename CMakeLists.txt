@@ -10,8 +10,10 @@ option(
   gtest_force_shared_crt
   "Use shared (DLL) run-time lib even when Google Test is built as static lib."
   ON)
-#3rd Party
+# 3rd Party
 add_subdirectory(./3rdParty/gtest)
+add_subdirectory(./3rdParty/glfw-3.2.1)
 
+# src dir
 add_subdirectory(./src/simple-project)
 
