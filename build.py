@@ -32,7 +32,7 @@ def main():
     if args.clean:
         shutil.rmtree("./_build/")
     elif args.build:
-        config_cmd = ["cmake", ".", "-B./_build", "-GVisual Studio 14 2015 Win64"]
+        config_cmd = ["cmake", ".", "-B./_build", "-GVisual Studio 15 2017 Win64"]
         subprocess.call(config_cmd)
         build_cmd = ["cmake", "--build", "_build"]
         subprocess.call(build_cmd)
