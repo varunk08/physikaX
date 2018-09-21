@@ -15,5 +15,5 @@ find_package(glfw)
 
 # src dir
 add_subdirectory(./src/simple-project)
-add_subdirectory(./src/window-framework)
+add_subdirectory(./src/app-framework)
 
