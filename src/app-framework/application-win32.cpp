@@ -6,7 +6,7 @@
 namespace {
 using namespace physika;
 
-physika::ApplicationWin32* sApp = nullptr; 
+ApplicationWin32* sApp = nullptr; 
 
 MouseButton MapMouseWin32ToPhi(WPARAM wParam)
 {
@@ -174,6 +174,8 @@ Keycode MapKeyWin32ToPhi(WPARAM wParam)
         return kSpace;
     case VK_ESCAPE:
         return kEsc;
+    default: 
+        return kKeyCodeCount; 
     }
 }
 
@@ -283,12 +285,10 @@ bool ApplicationWin32::Initialize()
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = mHinstance;
-    wcex.hIcon = LoadIcon(nullptr, MAKEINTRESOURCE(IDI_APPLICATION));
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = NULL;
     wcex.lpszClassName = szWindowClass;
-    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 
 
     if (!RegisterClassEx(&wcex)) {
@@ -307,7 +307,7 @@ bool ApplicationWin32::Initialize()
         NULL,
         NULL,
         mHinstance,
-        NULL,
+        NULL
         );
 
 
@@ -322,7 +322,7 @@ bool ApplicationWin32::Initialize()
     return true; 
 }
 
-bool physika::ApplicationWin32::Shutdown()
+bool ApplicationWin32::Shutdown()
 {
     return DestroyWindow(mHwnd);
 }
@@ -344,35 +344,35 @@ void ApplicationWin32::Run()
     }
 }
 
-void physika::ApplicationWin32::OnUpdate()
+void ApplicationWin32::OnUpdate()
 {
 }
 
-void physika::ApplicationWin32::OnResize(int width, int height)
+void ApplicationWin32::OnResize(int /*width*/, int /*height*/ )
 {
 }
 
-void physika::ApplicationWin32::OnKeyUp(Keycode key)
+void ApplicationWin32::OnKeyUp(Keycode /*key*/ )
 {
 }
 
-void physika::ApplicationWin32::OnKeyDown(Keycode key)
+void ApplicationWin32::OnKeyDown(Keycode /*key*/ )
 {
 }
 
-void physika::ApplicationWin32::OnMouseUp(MouseButton button, int x, int y)
+void ApplicationWin32::OnMouseUp(MouseButton /*button*/, int /*x*/, int /*y*/)
 {
 }
 
-void physika::ApplicationWin32::OnMouseDown(MouseButton button, int x, int y)
+void ApplicationWin32::OnMouseDown(MouseButton /*button*/, int /*x*/, int /*y*/)
 {
 }
 
-void physika::ApplicationWin32::OnMouseMove(int x, int y)
+void ApplicationWin32::OnMouseMove(int /*x*/, int /*y*/)
 {
 }
 
-void physika::ApplicationWin32::OnMouseWheel(int delta)
+void ApplicationWin32::OnMouseWheel(int /*delta*/)
 {
 }
 

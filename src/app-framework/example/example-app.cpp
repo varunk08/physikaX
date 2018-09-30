@@ -13,31 +13,31 @@ void ExampleApp::OnUpdate()
 {
 }
 
-void ExampleApp::OnResize(int width, int height)
+void ExampleApp::OnResize(int /*width*/, int /*height*/)
 {
 }
 
-void ExampleApp::OnKeyUp(Keycode key)
+void ExampleApp::OnKeyUp(Keycode /*key*/)
 {
 }
 
-void ExampleApp::OnKeyDown(Keycode key)
+void ExampleApp::OnKeyDown(Keycode /*key*/)
 {
 }
 
-void ExampleApp::OnMouseUp(MouseButton button, int x, int y)
+void ExampleApp::OnMouseUp(MouseButton /*button*/, int /*x*/, int /*y*/)
 {
 }
 
-void ExampleApp::OnMouseDown(MouseButton button, int x, int y)
+void ExampleApp::OnMouseDown(MouseButton /*button*/, int /*x*/, int /*y*/)
 {
 }
 
-void ExampleApp::OnMouseMove(int x, int y)
+void ExampleApp::OnMouseMove(int /*x*/, int /*y*/)
 {
 }
 
-void ExampleApp::OnMouseWheel(int delta)
+void ExampleApp::OnMouseWheel(int /*delta*/)
 {
 }
 
