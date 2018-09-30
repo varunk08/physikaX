@@ -4,11 +4,11 @@ Jay R Ravi
 **/
 
 #include <windows.h>
-#include "application-win32.h"
+#include "application.h"
 
 int main()
 {
-    physika::ApplicationWin32 app(_T("Physika App Framework"), 1024, 768); 
+    physika::Application app(_T("Physika App Framework"), 1024, 768); 
     app.Initialize(); 
     app.Run(); 
     return 0; 
