@@ -322,8 +322,9 @@ bool ApplicationWin32::Initialize()
     return true; 
 }
 
-void physika::ApplicationWin32::Shutdown()
+bool physika::ApplicationWin32::Shutdown()
 {
+    return DestroyWindow(mHwnd);
 }
 
 void ApplicationWin32::Run()
