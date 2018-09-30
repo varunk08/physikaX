@@ -3,13 +3,23 @@ Apr 8, 2018
 Jay R Ravi
 **/
 
-#include "app-framework/application.h"
+#include <stdio.h>
+#include "example-app.h"
 
 int main()
 {
-    physika::Application app(_T("Physika App Framework"), 1024, 768); 
-    app.Initialize(); 
+    example::ExampleApp app(_T("Physika App Framework"), 1024, 768); 
+    
+    if (!app.Initialize()) {
+        printf("Could not initialize app. Exiting"); 
+        return 1; 
+    }
     app.Run(); 
+
+    if (!app.Shutdown()) {
+        printf("Shutdown sequence failed.");
+        return 1;
+    }
     return 0; 
 }
 

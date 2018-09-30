@@ -15,6 +15,9 @@ target_include_directories(app-framework PUBLIC include)
 
 
 # Configure example project
-add_executable(${TARGET}-example example/main.cpp)
+add_executable(${TARGET}-example example/main.cpp
+                                 example/example-app.h
+                                 example/example-app.cpp)
 
+# link to app-framework static library
 target_link_libraries(${TARGET}-example ${TARGET})
