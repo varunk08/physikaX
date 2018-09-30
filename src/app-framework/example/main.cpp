@@ -3,8 +3,7 @@ Apr 8, 2018
 Jay R Ravi
 **/
 
-#include <windows.h>
-#include "application.h"
+#include "app-framework/application.h"
 
 int main()
 {

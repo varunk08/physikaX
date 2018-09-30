@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <tchar.h>
 
-#include "input.h"
+#include "app-framework/input.h"
 
 namespace physika {
 

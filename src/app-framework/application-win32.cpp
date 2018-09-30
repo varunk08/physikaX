@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <windows.h>
-#include "application-win32.h"
+#include "app-framework/application-win32.h"
 
 namespace {
 using namespace physika;
