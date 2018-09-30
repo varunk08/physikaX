@@ -11,7 +11,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # 3rd Party
 find_package(gtest)
-find_package(glfw)
+#find_package(glfw)
 
 # src dir
 add_subdirectory(./src/simple-project)
