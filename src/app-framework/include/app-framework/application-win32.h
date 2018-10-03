@@ -1,7 +1,7 @@
 #pragma once
 
-#include <tchar.h>
 #include <Windows.h>
+#include <tchar.h>
 
 #include "app-framework/input.h"
 
@@ -12,53 +12,52 @@ namespace physika {
 //!         this class to add custom logic to callbacks
 class ApplicationWin32
 {
-public: 
+public:
+    ApplicationWin32(TCHAR const* const title, int width, int height);
 
-    ApplicationWin32(TCHAR const* const title, int width, int height); 
-   
-    //! @brief Call this to initialize application. 
+    //! @brief Call this to initialize application.
     //! @return Bool value indicating success or failure
     bool Initialize();
 
-    //! @brief Call this to shutdown application. 
+    //! @brief Call this to shutdown application.
     //! @return Bool value indicating success or failure
     bool Shutdown();
 
-    //! @brief Call this to begin event loop. 
+    //! @brief Call this to begin event loop.
     void Run();
 
-    //! @brief Override this callback to handle frame updates. 
+    //! @brief Override this callback to handle frame updates.
     virtual void OnUpdate();
-    
-    //! @brief Override this to handle window resizing. 
+
+    //! @brief Override this to handle window resizing.
     virtual void OnResize(int width, int height);
 
-    //! @brief Override this to handle key up event. 
+    //! @brief Override this to handle key up event.
     virtual void OnKeyUp(Keycode key);
 
-    //! @brief Override this to handle key down event. 
+    //! @brief Override this to handle key down event.
     virtual void OnKeyDown(Keycode key);
 
-    //! @brief Override this to handle mouse up event. 
+    //! @brief Override this to handle mouse up event.
     virtual void OnMouseUp(MouseButton button, int x, int y);
 
-    //! @brief Override this to handle mouse down event. 
+    //! @brief Override this to handle mouse down event.
     virtual void OnMouseDown(MouseButton button, int x, int y);
 
-    //! @brief Override this to handle mouse movement event. 
+    //! @brief Override this to handle mouse movement event.
     virtual void OnMouseMove(int x, int y);
 
-    //! @brief Override this to handle mouse wheel rotation event. 
+    //! @brief Override this to handle mouse wheel rotation event.
     virtual void OnMouseWheel(int delta);
-    
+
 private:
-    int mWidth; 
-    int mHeight; 
+    int          mWidth;
+    int          mHeight;
     TCHAR const* mWindowTitle;
 
     //! OS Specific
-    HWND mHwnd;
+    HWND      mHwnd;
     HINSTANCE mHinstance;
 };
 
-} // namespace physika
+}  // namespace physika
