@@ -280,18 +280,18 @@ bool ApplicationWin32::Initialize()
     TCHAR szWindowClass[] = _T("win32app");
 
     WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
-    wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = mHinstance;
-    wcex.hIcon = nullptr;
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wcex.cbSize        = sizeof(WNDCLASSEX);
+    wcex.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
+    wcex.lpfnWndProc   = WndProc;
+    wcex.cbClsExtra    = 0;
+    wcex.cbWndExtra    = 0;
+    wcex.hInstance     = mHinstance;
+    wcex.hIcon         = nullptr;
+    wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName  = NULL;
     wcex.lpszClassName = szWindowClass;
-    wcex.hIconSm = nullptr;
+    wcex.hIconSm       = nullptr;
 
     if (!RegisterClassEx(&wcex)) {
         MessageBox(NULL, _T("Call to RegisterClassEx failed"), _T("Error"),

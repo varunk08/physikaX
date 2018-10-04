@@ -8,4 +8,4 @@ namespace physika {
 typedef ApplicationWin32 Application;
 }
 
-#endif 
+#endif

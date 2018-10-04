@@ -1,17 +1,16 @@
 #pragma once
 
-#include "app-framework/input.h"
 #include "app-framework/application.h"
-
+#include "app-framework/input.h"
 
 namespace example {
 
-using physika::MouseButton; 
 using physika::Keycode;
+using physika::MouseButton;
 
-class ExampleApp: public physika::Application
+class ExampleApp : public physika::Application
 {
-public: 
+public:
     ExampleApp(TCHAR const* const title, int width, int height);
     void OnUpdate() override;
     void OnResize(int width, int height) override;
@@ -23,4 +22,4 @@ public:
     void OnMouseWheel(int delta) override;
 };
 
-} //! namespace example
+}  // namespace example
