@@ -285,10 +285,12 @@ bool ApplicationWin32::Initialize()
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = mHinstance;
+    wcex.hIcon = nullptr;
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = NULL;
     wcex.lpszClassName = szWindowClass;
+    wcex.hIconSm = nullptr;
 
 
     if (!RegisterClassEx(&wcex)) {
