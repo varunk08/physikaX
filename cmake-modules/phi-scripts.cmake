@@ -23,7 +23,7 @@ function(phi_add_executable PHI_TARGET)
     add_custom_command(
         TARGET ${PHI_TARGET}
         PRE_BUILD
-        COMMAND clang-format.exe -i -style=file ${PHI_SOURCES}
+        COMMAND clang-format -i -style=file ${PHI_SOURCES}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
 endfunction()
@@ -55,7 +55,7 @@ function(phi_add_library PHI_TARGET)
     add_custom_command(
         TARGET ${PHI_TARGET}
         PRE_BUILD
-        COMMAND clang-format.exe -i -style=file ${PHI_SOURCES}
+        COMMAND clang-format -i -style=file ${PHI_SOURCES}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
 endfunction()
