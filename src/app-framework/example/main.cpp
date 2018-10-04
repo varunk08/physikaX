@@ -8,21 +8,17 @@ Jay R Ravi
 
 int main()
 {
-    example::ExampleApp app(_T("Physika App Framework"), 1024, 768); 
-    
+    example::ExampleApp app(_T("Physika App Framework"), 1024, 768);
+
     if (!app.Initialize()) {
-        printf("Could not initialize app. Exiting"); 
-        return 1; 
+        printf("Could not initialize app. Exiting");
+        return 1;
     }
-    app.Run(); 
+    app.Run();
 
     if (!app.Shutdown()) {
         printf("Shutdown sequence failed.");
         return 1;
     }
-    return 0; 
+    return 0;
 }
-
-
-
-
