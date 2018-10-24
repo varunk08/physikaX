@@ -19,7 +19,6 @@ endif()
 
 # 3rd Party
 find_package(gtest)
-#find_package(glfw)
 
 # src dir
 add_subdirectory(./src/simple-project)
