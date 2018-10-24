@@ -181,12 +181,13 @@ Keycode MapKeyWin32ToPhi(WPARAM wParam)
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    int x      = 0;
+    int y      = 0;
+    int width  = 0;
+    int height = 0;
+    int delta  = 0;
+
     MouseButton mouseButton = MouseButton::kMouseNone;
-    int         x           = 0;
-    int         y           = 0;
-    int         width       = 0;
-    int         height      = 0;
-    int         delta       = 0;
     switch (message) {
     case WM_PAINT:
         break;
