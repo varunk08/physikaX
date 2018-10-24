@@ -2,10 +2,10 @@
 
 namespace physika {
 
-enum MouseButton: int {
-    kMouseNone = 0, 
-    kMouseLeft = 1 << 1,
-    kMouseRight = 1 << 2,
+enum MouseButton : int {
+    kMouseNone   = 0,
+    kMouseLeft   = 1 << 1,
+    kMouseRight  = 1 << 2,
     kMouseMiddle = 1 << 3,
     kMouseExtra1 = 1 << 4,
     kMouseExtra2 = 1 << 5,
@@ -93,32 +93,37 @@ enum Keycode {
     kRightControl,
     kLeftSuper,
     kRightSuper,
-    kLeftAlt, 
-    kRightAlt, 
+    kLeftAlt,
+    kRightAlt,
     kSpace,
     kEsc,
 
-    kKeyCodeCount, 
+    kKeyCodeCount,
 };
 
-
-//! Ref: https://stackoverflow.com/questions/15889414/how-to-overload-operator-on-scoped-enum
-inline MouseButton operator|(MouseButton const& leftSide, MouseButton const& rightSide)
+//! Ref:
+//! https://stackoverflow.com/questions/15889414/how-to-overload-operator-on-scoped-enum
+inline MouseButton operator|(MouseButton const& leftSide,
+                             MouseButton const& rightSide)
 {
-    MouseButton result = static_cast<MouseButton>(static_cast<int>(leftSide) | static_cast<int>(rightSide));
+    MouseButton result = static_cast<MouseButton>(static_cast<int>(leftSide) |
+                                                  static_cast<int>(rightSide));
     return result;
 }
 
-inline MouseButton operator&(MouseButton const& leftSide, MouseButton const& rightSide)
+inline MouseButton operator&(MouseButton const& leftSide,
+                             MouseButton const& rightSide)
 {
-    MouseButton result = static_cast<MouseButton>(static_cast<int>(leftSide) & static_cast<int>(rightSide));
-    return result; 
+    MouseButton result = static_cast<MouseButton>(static_cast<int>(leftSide) &
+                                                  static_cast<int>(rightSide));
+    return result;
 }
 
-inline MouseButton& operator|=(MouseButton& leftSide, MouseButton const& rightSide)
+inline MouseButton& operator|=(MouseButton&       leftSide,
+                               MouseButton const& rightSide)
 {
     leftSide = leftSide | rightSide;
-    return leftSide; 
+    return leftSide;
 }
 
-} //! namespace physika
+}  // namespace physika

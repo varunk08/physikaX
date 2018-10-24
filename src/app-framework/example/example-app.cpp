@@ -4,8 +4,8 @@
 
 namespace example {
 
-ExampleApp::ExampleApp(TCHAR const * const title, int width, int height):
-                    physika::Application(title, width, height)
+ExampleApp::ExampleApp(TCHAR const* const title, int width, int height)
+    : physika::Application(title, width, height)
 {
 }
 
@@ -41,4 +41,4 @@ void ExampleApp::OnMouseWheel(int /*delta*/)
 {
 }
 
-} //! namespace example
+}  // namespace example
