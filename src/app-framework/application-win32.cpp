@@ -1,16 +1,16 @@
 
+#include "app-framework/application-win32.h"
 #include <stdio.h>
 #include <windows.h>
-#include "app-framework/application-win32.h"
 
 namespace {
 using namespace physika;
 
-ApplicationWin32* sApp = nullptr; 
+ApplicationWin32* sApp = nullptr;
 
 MouseButton MapMouseWin32ToPhi(WPARAM wParam)
 {
-    MouseButton result = kMouseNone; 
+    MouseButton result = kMouseNone;
     if (wParam & MK_LBUTTON) {
         result |= kMouseLeft;
     }
@@ -20,7 +20,7 @@ MouseButton MapMouseWin32ToPhi(WPARAM wParam)
     if (wParam & MK_MBUTTON) {
         result |= kMouseMiddle;
     }
-    return result; 
+    return result;
 }
 
 Keycode MapKeyWin32ToPhi(WPARAM wParam)
@@ -174,19 +174,20 @@ Keycode MapKeyWin32ToPhi(WPARAM wParam)
         return kSpace;
     case VK_ESCAPE:
         return kEsc;
-    default: 
-        return kKeyCodeCount; 
+    default:
+        return kKeyCodeCount;
     }
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    MouseButton mouseButton = MouseButton::kMouseNone; 
-    int x = 0;
-    int y = 0; 
-    int width = 0; 
+    int x      = 0;
+    int y      = 0;
+    int width  = 0;
     int height = 0;
-    int delta = 0; 
+    int delta  = 0;
+
+    MouseButton mouseButton = MouseButton::kMouseNone;
     switch (message) {
     case WM_PAINT:
         break;
@@ -197,61 +198,61 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         sApp->OnKeyDown(MapKeyWin32ToPhi(wParam));
         break;
     case WM_CHAR:
-        break; 
+        break;
     case WM_LBUTTONDOWN:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        mouseButton |= kMouseLeft; 
+        mouseButton |= kMouseLeft;
         mouseButton |= MapMouseWin32ToPhi(wParam);
         sApp->OnMouseDown(mouseButton, x, y);
         break;
     case WM_MBUTTONDOWN:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        mouseButton |= kMouseMiddle; 
+        mouseButton |= kMouseMiddle;
         mouseButton |= MapMouseWin32ToPhi(wParam);
         sApp->OnMouseDown(mouseButton, x, y);
         break;
     case WM_RBUTTONDOWN:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        mouseButton |= kMouseRight; 
+        mouseButton |= kMouseRight;
         mouseButton |= MapMouseWin32ToPhi(wParam);
         sApp->OnMouseDown(mouseButton, x, y);
-        break; 
+        break;
     case WM_LBUTTONUP:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        mouseButton |= kMouseLeft; 
+        mouseButton |= kMouseLeft;
         mouseButton |= MapMouseWin32ToPhi(wParam);
         sApp->OnMouseUp(mouseButton, x, y);
         break;
     case WM_MBUTTONUP:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        mouseButton |= kMouseMiddle; 
+        mouseButton |= kMouseMiddle;
         mouseButton |= MapMouseWin32ToPhi(wParam);
         sApp->OnMouseUp(mouseButton, x, y);
         break;
     case WM_RBUTTONUP:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        mouseButton |= kMouseRight; 
+        mouseButton |= kMouseRight;
         mouseButton |= MapMouseWin32ToPhi(wParam);
         sApp->OnMouseUp(mouseButton, x, y);
-        break; 
+        break;
     case WM_MOUSEMOVE:
         x = LOWORD(lParam);
         y = HIWORD(lParam);
         sApp->OnMouseMove(x, y);
-        break; 
+        break;
     case WM_MOUSEWHEEL:
         delta = GET_WHEEL_DELTA_WPARAM(wParam);
-        sApp->OnMouseWheel(delta); 
-        break; 
+        sApp->OnMouseWheel(delta);
+        break;
     case WM_SIZE:
-        width = LOWORD(lParam); 
-        height = HIWORD(lParam); 
+        width  = LOWORD(lParam);
+        height = HIWORD(lParam);
         sApp->OnResize(width, height);
         break;
     case WM_DESTROY:
@@ -263,55 +264,45 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return LRESULT();
 }
 
-} //namespace anonymous
+}  // namespace
 
 using namespace physika;
 
-ApplicationWin32::ApplicationWin32(TCHAR const* const title, int width, int height):
-    mWindowTitle(title), mWidth(width), mHeight(height)
-{ 
+ApplicationWin32::ApplicationWin32(TCHAR const* const title, int width,
+                                   int height)
+    : mWindowTitle(title), mWidth(width), mHeight(height)
+{
 }
 
 bool ApplicationWin32::Initialize()
 {
-    sApp = this; 
-    mHinstance = GetModuleHandle(nullptr); 
+    sApp                  = this;
+    mHinstance            = GetModuleHandle(nullptr);
     TCHAR szWindowClass[] = _T("win32app");
-    
-    WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
-    wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = mHinstance;
-    wcex.hIcon = nullptr;
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = szWindowClass;
-    wcex.hIconSm = nullptr;
 
+    WNDCLASSEX wcex;
+    wcex.cbSize        = sizeof(WNDCLASSEX);
+    wcex.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
+    wcex.lpfnWndProc   = WndProc;
+    wcex.cbClsExtra    = 0;
+    wcex.cbWndExtra    = 0;
+    wcex.hInstance     = mHinstance;
+    wcex.hIcon         = nullptr;
+    wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName  = NULL;
+    wcex.lpszClassName = szWindowClass;
+    wcex.hIconSm       = nullptr;
 
     if (!RegisterClassEx(&wcex)) {
-        MessageBox(NULL, _T("Call to RegisterClassEx failed"), _T("Error"), NULL);
+        MessageBox(NULL, _T("Call to RegisterClassEx failed"), _T("Error"),
+                   NULL);
         return false;
     }
-    
-    mHwnd = CreateWindow(
-        szWindowClass,
-        mWindowTitle,
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
-        mWidth,
-        mHeight,
-        NULL,
-        NULL,
-        mHinstance,
-        NULL
-        );
 
+    mHwnd = CreateWindow(szWindowClass, mWindowTitle, WS_OVERLAPPEDWINDOW,
+                         CW_USEDEFAULT, CW_USEDEFAULT, mWidth, mHeight, NULL,
+                         NULL, mHinstance, NULL);
 
     if (!mHwnd) {
         MessageBox(NULL, _T("Window Creation failed"), _T("Error"), NULL);
@@ -321,7 +312,7 @@ bool ApplicationWin32::Initialize()
     ShowWindow(mHwnd, SW_SHOW);
     UpdateWindow(mHwnd);
 
-    return true; 
+    return true;
 }
 
 bool ApplicationWin32::Shutdown()
@@ -332,14 +323,14 @@ bool ApplicationWin32::Shutdown()
 void ApplicationWin32::Run()
 {
     MSG msg;
-    ZeroMemory(&msg, sizeof(msg)); 
+    ZeroMemory(&msg, sizeof(msg));
     while (1) {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
         if (msg.message == WM_QUIT) {
-            break; 
+            break;
         } else {
             OnUpdate();
         }
@@ -350,15 +341,15 @@ void ApplicationWin32::OnUpdate()
 {
 }
 
-void ApplicationWin32::OnResize(int /*width*/, int /*height*/ )
+void ApplicationWin32::OnResize(int /*width*/, int /*height*/)
 {
 }
 
-void ApplicationWin32::OnKeyUp(Keycode /*key*/ )
+void ApplicationWin32::OnKeyUp(Keycode /*key*/)
 {
 }
 
-void ApplicationWin32::OnKeyDown(Keycode /*key*/ )
+void ApplicationWin32::OnKeyDown(Keycode /*key*/)
 {
 }
 
@@ -377,4 +368,3 @@ void ApplicationWin32::OnMouseMove(int /*x*/, int /*y*/)
 void ApplicationWin32::OnMouseWheel(int /*delta*/)
 {
 }
-
