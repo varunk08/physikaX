@@ -23,4 +23,5 @@ find_package(gtest)
 # src dir
 add_subdirectory(./src/simple-project)
 add_subdirectory(./src/app-framework)
+add_subdirectory(./src/dx11-cube)
 
