@@ -19,6 +19,7 @@ endif()
 
 # 3rd Party
 find_package(gtest)
+find_package(DirectX11)
 
 # src dir
 add_subdirectory(./src/simple-project)

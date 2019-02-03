@@ -12,4 +12,9 @@ phi_add_executable(${TARGET}
                         cube-app.h
                         cube-app.cpp)
 
-target_link_libraries(${TARGET} app-framework)
+target_link_libraries(${TARGET} app-framework
+                                ${DirectX11_LIBRARY})
+
+target_include_directories(${TARGET} 
+                            PRIVATE
+                            ${DirectX11_INCLUDE_DIR})
