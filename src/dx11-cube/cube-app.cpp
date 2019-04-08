@@ -35,8 +35,8 @@ bool CubeApp::Initialize()
 
     DXGI_SWAP_CHAIN_DESC swapChainDesc;
     swapChainDesc.BufferDesc.Format                = DXGI_FORMAT_R8G8B8A8_UNORM;
-    swapChainDesc.BufferDesc.Width                 = this->mWidth;
-    swapChainDesc.BufferDesc.Height                = this->mHeight;
+    swapChainDesc.BufferDesc.Width                 = mWidth;
+    swapChainDesc.BufferDesc.Height                = mHeight;
     swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
     swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
     swapChainDesc.BufferDesc.ScanlineOrdering =
@@ -61,7 +61,7 @@ bool CubeApp::Initialize()
 
     swapChainDesc.BufferCount  = 1;
     swapChainDesc.BufferUsage  = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    swapChainDesc.OutputWindow = (HWND)this->WindowHandle();
+    swapChainDesc.OutputWindow = (HWND)WindowHandle();
     swapChainDesc.Windowed     = true;
     swapChainDesc.SwapEffect   = DXGI_SWAP_EFFECT_DISCARD;
     swapChainDesc.Flags        = 0;
@@ -73,26 +73,72 @@ bool CubeApp::Initialize()
                                        (void**)&dxgiDevice))) {
         printf("Failed to query device");
         assert(false && "Failed to query device");
+        return false;
     }
     if (FAILED(dxgiDevice->GetParent(__uuidof(IDXGIAdapter),
                                      (void**)&dxgiAdapter))) {
         printf("Failed to get dxgi adapter");
         assert(false && "Failed to get dxgi adapter");
+        return false;
     }
     if (FAILED(dxgiAdapter->GetParent(__uuidof(IDXGIFactory),
                                       (void**)&dxgiFactory))) {
         printf("Failed to get dxgi factory");
         assert(false && "Failed to get dxgi factory");
+        return false;
     }
 
+    //! Create Swapchain
     if (FAILED(dxgiFactory->CreateSwapChain(mDevice, &swapChainDesc,
                                             &mSwapchain))) {
         assert(false && "Failed to create swapchain");
+        return false;
     }
 
     dxgiDevice->Release();
     dxgiAdapter->Release();
     dxgiFactory->Release();
+
+    //! Create Render Target View
+    ID3D11Texture2D* backBuffer = nullptr;
+
+    if (FAILED(mSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D),
+                                     (void**)&backBuffer))) {
+        assert(false && "Failed to obtain pointer to swapchain backbuffer");
+        return false;
+    }
+    mDevice->CreateRenderTargetView(backBuffer, 0, &mRenderTargetView);
+    backBuffer->Release();
+
+    //! Create depth buffer
+    D3D11_TEXTURE2D_DESC depthTextureDesc;
+    depthTextureDesc.Width              = mWidth;
+    depthTextureDesc.Height             = mHeight;
+    depthTextureDesc.MipLevels          = 1;
+    depthTextureDesc.ArraySize          = 1;
+    depthTextureDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    depthTextureDesc.SampleDesc.Count   = swapChainDesc.SampleDesc.Count;
+    depthTextureDesc.SampleDesc.Quality = swapChainDesc.SampleDesc.Quality;
+    depthTextureDesc.Usage              = D3D11_USAGE_DEFAULT;
+    depthTextureDesc.BindFlags          = D3D11_BIND_DEPTH_STENCIL;
+    depthTextureDesc.CPUAccessFlags     = 0;
+    depthTextureDesc.MiscFlags          = 0;
+
+    result = mDevice->CreateTexture2D(&depthTextureDesc, nullptr,
+                                      &mDepthStencilBuffer);
+    if (FAILED(result)) {
+        assert(false && "Failed to create depth stencil buffer");
+        return false;
+    }
+
+    if (FAILED(mDevice->CreateDepthStencilView(mDepthStencilBuffer, 0,
+                                               &mDepthStencilView))) {
+        assert(false && "Failed to create depth stencil view");
+        return false;
+    }
+
+    mDeviceContext->OMSetRenderTargets(1, &mRenderTargetView,
+                                       mDepthStencilView);
 
     return true;
 }

@@ -27,9 +27,12 @@ public:
 private:
     bool mEnableMSAA = false;
 
-    ID3D11Device*        mDevice        = nullptr;
-    ID3D11DeviceContext* mDeviceContext = nullptr;
-    IDXGISwapChain*      mSwapchain     = nullptr;
+    ID3D11Device*           mDevice             = nullptr;
+    ID3D11DeviceContext*    mDeviceContext      = nullptr;
+    IDXGISwapChain*         mSwapchain          = nullptr;
+    ID3D11RenderTargetView* mRenderTargetView   = nullptr;
+    ID3D11Texture2D*        mDepthStencilBuffer = nullptr;
+    ID3D11DepthStencilView* mDepthStencilView   = nullptr;
 };
 
 }  // namespace cube
