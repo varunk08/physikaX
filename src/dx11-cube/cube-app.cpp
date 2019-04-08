@@ -140,6 +140,16 @@ bool CubeApp::Initialize()
     mDeviceContext->OMSetRenderTargets(1, &mRenderTargetView,
                                        mDepthStencilView);
 
+    // Set Viewport
+    D3D11_VIEWPORT viewportDesc;
+    viewportDesc.Width    = (float)mWidth;
+    viewportDesc.Height   = (float)mHeight;
+    viewportDesc.MaxDepth = 1.0f;
+    viewportDesc.MinDepth = 0.0f;
+    viewportDesc.TopLeftX = 0.0f;
+    viewportDesc.TopLeftY = 0.0f;
+    mDeviceContext->RSSetViewports(1, &viewportDesc);
+
     return true;
 }
 
