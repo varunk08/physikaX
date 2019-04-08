@@ -161,6 +161,14 @@ bool CubeApp::Shutdown()
 
 void CubeApp::OnUpdate()
 {
+    float color[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    //! Clear render target to black
+    mDeviceContext->ClearRenderTargetView(mRenderTargetView, color);
+    //! Clear depth buffer
+    mDeviceContext->ClearDepthStencilView(
+        mDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+    //! present
+    mSwapchain->Present(0, 0);
 }
 
 void CubeApp::OnResize(int /*width*/, int /*height*/)
