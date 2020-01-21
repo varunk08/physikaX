@@ -25,6 +25,7 @@ function(phi_add_executable PHI_TARGET)
         PRE_BUILD
         COMMAND clang-format -i -style=file ${PHI_SOURCES}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Formattig target ${PHI_TARGET}"
     )
 endfunction()
 
@@ -57,6 +58,7 @@ function(phi_add_library PHI_TARGET)
         PRE_BUILD
         COMMAND clang-format -i -style=file ${PHI_SOURCES}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Formattig sources ${PHI_TARGET}"
     )
 endfunction()
 
