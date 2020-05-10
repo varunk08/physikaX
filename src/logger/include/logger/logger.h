@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 namespace physika {
 namespace logger {
 
@@ -13,31 +15,41 @@ enum class LogLevel {
 };
 
 void SetLoggingLevel(LogLevel level);
-void LogMessage(LogLevel level, char const* severity, char const* message);
+void LogMessage(LogLevel level, const char* format, ...);
 
-inline void LOG_FATAL(char const* message)
+template <typename... Targs>
+inline void LOG_FATAL(char const* message, Targs&&... args)
 {
-    LogMessage(LogLevel::kFatal, "FATAL", message);
+    LogMessage(LogLevel::kFatal, message, std::forward<Targs&&>(args)...);
 }
-inline void LOG_ERROR(char const* message)
+
+template <typename... Targs>
+inline void LOG_ERROR(char const* message, Targs&&... args)
 {
-    LogMessage(LogLevel::kError, "ERROR", message);
+    LogMessage(LogLevel::kError, message, std::forward<Targs&&>(args)...);
 }
-inline void LOG_WARN(char const* message)
+
+template <typename... Targs>
+inline void LOG_WARN(char const* message, Targs&&... args)
 {
-    LogMessage(LogLevel::kWarn, "WARN", message);
+    LogMessage(LogLevel::kWarn, message, std::forward<Targs&&>(args)...);
 }
-inline void LOG_INFO(char const* message)
+
+template <typename... Targs>
+inline void LOG_INFO(const char* message, Targs&&... args)
 {
-    LogMessage(LogLevel::kInfo, "INFO", message);
+    LogMessage(LogLevel::kInfo, message, std::forward<Targs&&>(args)...);
 }
-inline void LOG_DEBUG(char const* message)
+
+template <typename... Targs>
+inline void LOG_DEBUG(char const* message, Targs&&... args)
 {
-    LogMessage(LogLevel::kDebug, "DEBUG", message);
+    LogMessage(LogLevel::kDebug, message, std::forward<Targs&&>(args)...);
 }
-inline void LOG_TRACE(char const* message)
+template <typename... Targs>
+inline void LOG_TRACE(char const* message, Targs&&... args)
 {
-    LogMessage(LogLevel::kTrace, "TRACE", message);
+    LogMessage(LogLevel::kTrace, message, std::forward<Targs&&>(args)...);
 }
 
 }  // namespace logger

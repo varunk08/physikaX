@@ -1,10 +1,34 @@
 #include "logger/logger.h"
 
-#include <iostream>
+#include <stdarg.h>
+#include <stdio.h>
 
 namespace {
-physika::logger::LogLevel sLevel;
+
+using namespace physika::logger;
+
+LogLevel sLevel;
+
+const char* StringifyLogLevel(physika::logger::LogLevel level)
+{
+    switch (level) {
+    case LogLevel::kTrace:
+        return "TRACE";
+    case LogLevel::kDebug:
+        return "DEBUG";
+    case LogLevel::kInfo:
+        return "INFO";
+    case LogLevel::kWarn:
+        return "WARN";
+    case LogLevel::kError:
+        return "ERROR";
+    case LogLevel::kFatal:
+        return "FATAL";
+    default:
+        return "";
+    }
 }
+}  // namespace
 
 namespace physika {
 namespace logger {
@@ -13,12 +37,20 @@ void SetLoggingLevel(LogLevel level)
 {
     sLevel = level;
 }
-void LogMessage(LogLevel level, char const* severity, char const* message)
+
+void LogMessage(LogLevel level, char const* format...)
 {
     if (level < sLevel) {
         return;
     }
-    printf("[%s]: %s\n", severity, message);
+    int const kBufferSize         = 2048;
+    char      buffer[kBufferSize] = {};
+    va_list   args;
+    va_start(args, format);
+    vsnprintf(buffer, kBufferSize - 1, format, args);
+    va_end(args);
+
+    printf("[%s]: %s\n", StringifyLogLevel(level), buffer);
 }
 
 }  // namespace logger
