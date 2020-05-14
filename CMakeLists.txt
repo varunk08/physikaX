@@ -20,7 +20,5 @@ endif()
 # 3rd Party
 find_package(gtest)
 
-# src dir
-add_subdirectory(./src/simple-project)
-add_subdirectory(./src/app-framework)
-
+# Root source directory
+add_subdirectory(src)
