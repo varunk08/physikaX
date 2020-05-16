@@ -17,6 +17,11 @@ float Timer::TotalRunningTime()
     return mTotalRunningTime;
 }
 
+float Timer::Delta()
+{
+    return mDelta;
+}
+
 void Timer::Start()
 {
     mTotalRunningTime = 0.0f;
@@ -35,7 +40,8 @@ void Timer::Reset()
         return;
     }
     mTotalRunningTime = 0.0f;
-    mPreviousTime     = 0.0f;
+    mDelta            = 0.0f;
+    mPreviousTime     = 0;
 }
 
 void Timer::Tick()
@@ -45,8 +51,8 @@ void Timer::Tick()
     }
     int64_t currentTime;
     QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
-    float delta = (float)(currentTime - mPreviousTime) * mSecondsPerCount;
-    mTotalRunningTime += delta;
+    mDelta = (float)(currentTime - mPreviousTime) * mSecondsPerCount;
+    mTotalRunningTime += mDelta;
     mPreviousTime = currentTime;
 }
 

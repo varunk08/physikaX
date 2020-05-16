@@ -18,7 +18,7 @@ public:
 
     /**
      * @brief Returns the total duration in seconds
-     *        for every Tick() between pairs of Start
+     *        for every Tick between pairs of Start
      *        and Stop calls.
      */
     float TotalRunningTime();
@@ -49,9 +49,16 @@ public:
      */
     void Reset();
 
+    /**
+     * @brief Returns the duration in
+     *        seconds between intervals
+     */
+    float Delta();
+
 private:
     bool    mStopped;
     float   mTotalRunningTime;
+    float   mDelta;
     float   mSecondsPerCount;
     int64_t mPreviousTime;
 };

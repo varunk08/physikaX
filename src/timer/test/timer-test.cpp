@@ -75,7 +75,35 @@ TEST(TimerTest, CallResetBetweenStartAndStop)
     timer.Stop();
     std::this_thread::sleep_for(std::chrono::seconds(1));
     timer.Tick();
-    ASSERT_GT(2.0f, timer.TotalRunningTime());
+    ASSERT_GE(2.0f, timer.TotalRunningTime());
+}
+
+TEST(TimerTest, GetDelta)
+{
+    Timer timer;
+    timer.Start();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    timer.Tick();
+
+    ASSERT_LE(1.0f, timer.Delta());
+    ASSERT_LE(1.0f, timer.TotalRunningTime());
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    timer.Tick();
+
+    ASSERT_LE(2.0f, timer.Delta());
+
+    timer.Stop();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    timer.Tick();
+
+    ASSERT_GT(4.0f, timer.TotalRunningTime());
+    ASSERT_LE(2.0f, timer.Delta());
+
+    timer.Reset();
+
+    ASSERT_FLOAT_EQ(0.0f, timer.Delta());
+    ASSERT_FLOAT_EQ(0.0f, timer.TotalRunningTime());
 }
 
 }  // namespace
