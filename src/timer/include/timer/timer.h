@@ -1,5 +1,5 @@
 #pragma once
-
+#include <stdint.h>
 namespace physika {
 
 /**
@@ -15,10 +15,44 @@ public:
      *
      */
     Timer();
+
     /**
-     * @brief Returns the total elapsed time since the
-     *        the creation of the timer object
+     * @brief Returns the total duration in seconds
+     *        for every Tick() between pairs of Start
+     *        and Stop calls.
      */
-    float TotalElapsedTime();
+    float TotalRunningTime();
+
+    /**
+     * @brief Call this function to sample time
+     *        between intervals
+     */
+    void Tick();
+
+    /**
+     * @brief Starts counting of running time
+     *
+     */
+    void Start();
+
+    /**
+     * @brief Stops counting of running time
+     */
+    void Stop();
+
+    /**
+     * @brief Resets the timer object and
+     *        sets all counters to zero
+     *        Note: Reset can be called only
+     *        after the timer is stopped else it
+     *        would silently fail.
+     */
+    void Reset();
+
+private:
+    bool    mStopped;
+    float   mTotalRunningTime;
+    float   mSecondsPerCount;
+    int64_t mPreviousTime;
 };
 }  // namespace physika
