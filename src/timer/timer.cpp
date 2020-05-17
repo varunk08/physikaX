@@ -3,8 +3,7 @@
 #include <Windows.h>
 namespace physika {
 
-Timer::Timer()
-    : mPreviousTime{ 0 }, mTotalRunningTime{ 0.0f }, mStopped{ false }
+Timer::Timer() : mPreviousTime{ 0 }, mTotalRunningTime{ 0.0f }, mStopped{ true }
 {
     int64_t frequency;
     QueryPerformanceCounter((LARGE_INTEGER*)&mPreviousTime);
@@ -24,14 +23,22 @@ float Timer::Delta()
 
 void Timer::Start()
 {
-    mTotalRunningTime = 0.0f;
-    QueryPerformanceCounter((LARGE_INTEGER*)&mPreviousTime);
-    mStopped = false;
+    if (mStopped) {
+        int64_t currentTime;
+        QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
+        mPreviousTime = currentTime;
+        mStopped      = false;
+    }
 }
 
 void Timer::Stop()
 {
+    if (mStopped) {
+        return;
+    }
     mStopped = true;
+    int64_t currentTime;
+    QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
 }
 
 void Timer::Reset()
@@ -47,11 +54,16 @@ void Timer::Reset()
 void Timer::Tick()
 {
     if (mStopped) {
+        mDelta = 0.0f;
         return;
     }
     int64_t currentTime;
     QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
-    mDelta = (float)(currentTime - mPreviousTime) * mSecondsPerCount;
+
+    int64_t delta = 0;
+    delta         = currentTime - mPreviousTime;
+
+    mDelta = (float)(delta)*mSecondsPerCount;
     mTotalRunningTime += mDelta;
     mPreviousTime = currentTime;
 }

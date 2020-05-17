@@ -25,18 +25,18 @@ public:
 
     /**
      * @brief Call this function to sample time
-     *        between intervals
+     *        between intervals.
      */
     void Tick();
 
     /**
-     * @brief Starts counting of running time
+     * @brief Starts counting of running time.
      *
      */
     void Start();
 
     /**
-     * @brief Stops counting of running time
+     * @brief Stops counting of running time.
      */
     void Stop();
 
@@ -61,5 +61,6 @@ private:
     float   mDelta;
     float   mSecondsPerCount;
     int64_t mPreviousTime;
+    int64_t mStartTime;
 };
 }  // namespace physika
