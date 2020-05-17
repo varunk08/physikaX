@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h>
+#include <stdint.h>  // int64_t
 namespace physika {
 
 /**
@@ -56,11 +56,13 @@ public:
     float Delta();
 
 private:
-    bool    mStopped;
-    float   mTotalRunningTime;
-    float   mDelta;
-    float   mSecondsPerCount;
-    int64_t mPreviousTime;
+    bool mStopped;
+
+    float mDelta;
+    float mTotalRunningTime;
+    float mSecondsPerCount;
+
     int64_t mStartTime;
+    int64_t mPreviousTime;
 };
 }  // namespace physika
