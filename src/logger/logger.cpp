@@ -59,7 +59,8 @@ void LogMessage(LogLevel level, char const* format...)
     vsnprintf(buffer, kBufferSize - 1, format, args);
     va_end(args);
 
-    printf("[%s]: %s\n", StringifyLogLevel(level), buffer);
+    printf("[%s] [%s]: %s\n", sApplicationName, StringifyLogLevel(level),
+           buffer);
 }
 
 }  // namespace logger
