@@ -8,6 +8,7 @@ namespace {
 using namespace physika::logger;
 
 LogLevel sLevel;
+char     sApplicationName[1024] = { '\0' };
 
 const char* StringifyLogLevel(physika::logger::LogLevel level)
 {
@@ -36,6 +37,14 @@ namespace logger {
 void SetLoggingLevel(LogLevel level)
 {
     sLevel = level;
+}
+
+void SetApplicationName(char const* applicationName)
+{
+    if (!applicationName) {
+        return;
+    }
+    snprintf(sApplicationName, sizeof(sApplicationName) - 1, applicationName);
 }
 
 void LogMessage(LogLevel level, char const* format...)

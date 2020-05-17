@@ -14,7 +14,33 @@ enum class LogLevel {
     kFatal = 1 << 5,
 };
 
+/**
+ * @brief Set the Application Name to show in log out
+ *
+ * @param applicationName A null terminated character string
+ */
+void SetApplicationName(char const* applicationName);
+
+/**
+ * @brief Set the Logging Level object
+ *
+ * @param level A user defined log level settings
+ *              to control log output
+ */
 void SetLoggingLevel(LogLevel level);
+
+/**
+ * @brief Log a message to the standard output
+ *        with a specified log level and
+ *        std printf formatting options
+ *
+ * @note Use the handy LOO_* functions which are
+ *       clean and easy to use instead for most cases.
+ *
+ * @param level Specify a log level for this message
+ * @param format Specify message formatting similar to printf
+ * @param ... Variable number of output arguments
+ */
 void LogMessage(LogLevel level, const char* format, ...);
 
 template <typename... Targs>
