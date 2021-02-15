@@ -45,4 +45,13 @@ target_link_libraries( # Specifies the target library.
 
                        # Links the target library to the log library
                        # included in the NDK.
-                       ${log-lib} )
+                       ${log-lib} 
+
+                       physika_renderer )
+
+#set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../../../../../cmake-modules)
+#include(phi-scripts)
+#include(Findgtest)
+
+# physika libraries
+add_subdirectory(${PROJECT_SOURCE_DIR}/../../../../../src/renderer build)
