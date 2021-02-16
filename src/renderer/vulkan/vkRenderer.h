@@ -1,6 +1,7 @@
 #include <iostream>
+#include "../renderer.h"
 
-class VkRenderer : public renderer {
+class VkRenderer : public Renderer {
 public:
 private:  
 };
