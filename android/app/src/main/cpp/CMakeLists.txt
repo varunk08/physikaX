@@ -52,6 +52,7 @@ target_link_libraries( # Specifies the target library.
 #set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../../../../../cmake-modules)
 #include(phi-scripts)
 #include(Findgtest)
+set(ENABLE_VULKAN  TRUE)
 
 # physika libraries
 add_subdirectory(${PROJECT_SOURCE_DIR}/../../../../../src/renderer build)
