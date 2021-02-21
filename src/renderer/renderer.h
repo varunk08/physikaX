@@ -1,15 +1,19 @@
+#pragma once
 #include <iostream>
 
 enum RendererType:uint32_t {
     VULKAN = 0,
-    DX12,
-    OPENGL
+    OPENGL,
+    DX12
 };
 
 class Renderer {
 public:
-    Renderer(const RendererType& renderer_type);
+    static Renderer* CreateRenderer(const RendererType& renderer_type);
+    virtual void Init() = 0;
+
     ~Renderer();
 
-private:
+protected:
+    Renderer();
 };

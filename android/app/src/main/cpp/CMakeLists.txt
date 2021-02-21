@@ -9,6 +9,9 @@ cmake_minimum_required(VERSION 3.10.2)
 
 project("physika")
 
+add_library(native_app_glue STATIC
+        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -36,23 +39,26 @@ find_library( # Sets the name of the path variable.
               # you want CMake to locate.
               log )
 
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
+
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
-
 target_link_libraries( # Specifies the target library.
                        native-lib
-
-                       # Links the target library to the log library
-                       # included in the NDK.
-                       ${log-lib} 
-
+                       android
+                       ${log-lib}
+                       native_app_glue
                        physika_renderer )
+
+target_include_directories(native-lib PRIVATE
+        ${ANDROID_NDK}/sources/android/native_app_glue
+        ${PROJECT_SOURCE_DIR}/../../../../../src/)
 
 #set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../../../../../cmake-modules)
 #include(phi-scripts)
 #include(Findgtest)
-set(ENABLE_VULKAN  TRUE)
+set(ENABLE_VULKAN TRUE)
 
 # physika libraries
 add_subdirectory(${PROJECT_SOURCE_DIR}/../../../../../src/renderer build)
