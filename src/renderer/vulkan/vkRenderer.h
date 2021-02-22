@@ -1,6 +1,5 @@
-#include <iostream>
 #include "../renderer.h"
-#include <vulkan/vulkan.hpp>
+#include <iostream>
 
 class VkRenderer : public Renderer {
 public:

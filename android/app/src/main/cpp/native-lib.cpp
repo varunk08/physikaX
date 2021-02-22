@@ -7,8 +7,8 @@
 #include "renderer/renderer.h"
 
 bool initialize(android_app* app) {
-    Renderer* renderer_ = Renderer::CreateRenderer(RendererType::VULKAN);
-    renderer_->Init();
+    Renderer* renderer = Renderer::CreateRenderer(RendererType::VULKAN);
+    renderer->Init();
     return true;
 }
 
