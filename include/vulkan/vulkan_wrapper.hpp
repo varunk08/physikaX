@@ -458,15 +458,5 @@ extern PFN_vkUpdateDescriptorSetWithTemplate vkUpdateDescriptorSetWithTemplate;
 extern PFN_vkUpdateDescriptorSetWithTemplateKHR vkUpdateDescriptorSetWithTemplateKHR;
 extern PFN_vkWaitSemaphores vkWaitSemaphores;
 extern PFN_vkWaitSemaphoresKHR vkWaitSemaphoresKHR;
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
-//PFN_
+
 #endif // VULKAN_WRAPPER_H

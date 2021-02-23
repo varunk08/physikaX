@@ -1,9 +1,11 @@
 #include "vkRenderer.h"
 #include <stdexcept>
-#include <vulkan/vulkan_wrapper.hpp>
 
+#if __ANDROID__
+#include <vulkan/vulkan_wrapper.hpp>
 #undef VK_NO_PROTOTYPES
-//#define VULKAN_HPP_DISPATCH_LOADER_DYNAMIC 0
+#endif
+
 #include <vulkan/vulkan.hpp>
 
 void VkRenderer::Init() {
