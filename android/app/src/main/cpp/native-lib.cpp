@@ -8,7 +8,7 @@
 
 bool initialize(android_app* app) {
     Renderer* renderer = Renderer::CreateRenderer(RendererType::VULKAN);
-    renderer->Init();
+    renderer->init();
     return true;
 }
 
